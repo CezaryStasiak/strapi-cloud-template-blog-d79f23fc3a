@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "qa_sections",
+  "info": {
+    "singularName": "qa-section",
+    "pluralName": "qa-sections",
+    "displayName": "QA-Sekcje"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nazwa": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "qas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::qa.qa",
+      "mappedBy": "qa_sekcje"
+    }
+  }
+}

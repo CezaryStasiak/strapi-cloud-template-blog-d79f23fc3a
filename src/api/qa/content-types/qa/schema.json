@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "qas",
+  "info": {
+    "singularName": "qa",
+    "pluralName": "qas",
+    "displayName": "QA"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Pytanie": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Odpowiedz": {
+      "type": "richtext",
+      "required": true
+    },
+    "qa_sekcje": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::qa-section.qa-section",
+      "inversedBy": "qas"
+    }
+  }
+}

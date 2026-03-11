@@ -510,6 +510,10 @@ export interface ApiLabelLabel extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::label.label'> &
       Schema.Attribute.Private;
+    Obrazek: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -546,6 +550,69 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     Sekcja: Schema.Attribute.Relation<'manyToOne', 'api::section.section'>;
     Spec: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiQaSectionQaSection extends Struct.CollectionTypeSchema {
+  collectionName: 'qa_sections';
+  info: {
+    displayName: 'QA-Sekcje';
+    pluralName: 'qa-sections';
+    singularName: 'qa-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::qa-section.qa-section'
+    > &
+      Schema.Attribute.Private;
+    Nazwa: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    qas: Schema.Attribute.Relation<'oneToMany', 'api::qa.qa'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiQaQa extends Struct.CollectionTypeSchema {
+  collectionName: 'qas';
+  info: {
+    displayName: 'QA';
+    pluralName: 'qas';
+    singularName: 'qa';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::qa.qa'> &
+      Schema.Attribute.Private;
+    Odpowiedz: Schema.Attribute.RichText & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    Pytanie: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    qa_sekcje: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::qa-section.qa-section'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1095,6 +1162,8 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::label.label': ApiLabelLabel;
       'api::module.module': ApiModuleModule;
+      'api::qa-section.qa-section': ApiQaSectionQaSection;
+      'api::qa.qa': ApiQaQa;
       'api::section.section': ApiSectionSection;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
