@@ -1,5 +1,13 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedBulet1 extends Struct.ComponentSchema {
+  collectionName: 'components_shared_bulet1s';
+  info: {
+    displayName: 'Bulet1';
+  };
+  attributes: {};
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -8,6 +16,16 @@ export interface SharedMedia extends Struct.ComponentSchema {
   };
   attributes: {
     file: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+  };
+}
+
+export interface SharedProstytext extends Struct.ComponentSchema {
+  collectionName: 'components_shared_prostytexts';
+  info: {
+    displayName: 'prostytext';
+  };
+  attributes: {
+    dasda: Schema.Attribute.Text;
   };
 }
 
@@ -65,7 +83,9 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.bulet1': SharedBulet1;
       'shared.media': SharedMedia;
+      'shared.prostytext': SharedProstytext;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;

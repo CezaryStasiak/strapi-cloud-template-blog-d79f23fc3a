@@ -36,6 +36,15 @@
       "relation": "manyToOne",
       "target": "api::section.section",
       "inversedBy": "Moduly"
+    },
+    "ZawartoscStandard": {
+      "type": "blocks"
+    },
+    "ListaZawartosci": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.bulet1"
+      ]
     }
   }
 }

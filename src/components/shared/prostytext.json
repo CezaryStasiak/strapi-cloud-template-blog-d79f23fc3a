@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_prostytexts",
+  "info": {
+    "displayName": "prostytext"
+  },
+  "options": {},
+  "attributes": {
+    "dasda": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

@@ -20,9 +20,9 @@
       "type": "richtext",
       "required": true
     },
-    "qa_sekcje": {
+    "qa_sekcjes": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::qa-section.qa-section",
       "inversedBy": "qas"
     }

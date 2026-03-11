@@ -18,9 +18,9 @@
     },
     "qas": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::qa.qa",
-      "mappedBy": "qa_sekcje"
+      "mappedBy": "qa_sekcjes"
     }
   }
 }
