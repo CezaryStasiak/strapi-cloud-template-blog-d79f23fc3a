@@ -606,6 +606,7 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    article: Schema.Attribute.Relation<'oneToOne', 'api::article.article'>;
     Cena: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -616,6 +617,36 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
       'api::module.module'
     > &
       Schema.Attribute.Private;
+    Nazwa: Schema.Attribute.String;
+    pakiet: Schema.Attribute.Relation<'manyToOne', 'api::pakiet.pakiet'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPakietPakiet extends Struct.CollectionTypeSchema {
+  collectionName: 'pakiets';
+  info: {
+    displayName: 'Pakiet';
+    pluralName: 'pakiets';
+    singularName: 'pakiet';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::pakiet.pakiet'
+    > &
+      Schema.Attribute.Private;
+    moduly: Schema.Attribute.Relation<'oneToMany', 'api::module.module'>;
     Nazwa: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -1140,6 +1171,7 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::module.module': ApiModuleModule;
+      'api::pakiet.pakiet': ApiPakietPakiet;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
